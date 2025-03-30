@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Report Fault</title>
+</head>
+
+<body>
+    <h1>Report Fault</h1>
+
+    <form action="/report-fault" method="POST">
+
+        <!-- ✅ Corrected label association -->
+        <label for="streetlightID">Streetlight ID:</label>
+        <input type="text" id="streetlightID" name="streetlightID" required>
+
+        <label for="faultType">Fault Type:</label>
+        <select id="faultType" name="faultType">
+            <option value="LED Failure">LED Failure</option>
+            <option value="Power Outage">Power Outage</option>
+            <option value="Connectivity Issue">Connectivity Issue</option>
+        </select>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+
+        <button type="submit">Submit</button>
+
+    </form>
+</body>
+
+</html>

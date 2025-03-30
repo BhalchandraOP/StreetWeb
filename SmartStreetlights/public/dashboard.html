@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Smart Streetlights Dashboard</h1>
+
+    <div>
+        <h2>Reported Faults</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Streetlight ID</th>
+                    <th>Fault Type</th>
+                    <th>Description</th>
+                    <th>Reported At</th>
+                </tr>
+            </thead>
+            <tbody id="faultTableBody">
+                <!-- Fault reports will be dynamically inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // ✅ Fetch faults from MongoDB and display them in the table
+        async function fetchFaults() {
+            try {
+                const response = await fetch('/api/faults');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch faults');
+                }
+
+                const faults = await response.json();
+                const tableBody = document.getElementById('faultTableBody');
+                tableBody.innerHTML = '';  // Clear existing rows
+
+                faults.forEach(fault => {
+                    const row = document.createElement('tr');
+
+                    row.innerHTML = `
+                        <td>${fault.streetlightID}</td>
+                        <td>${fault.faultType}</td>
+                        <td>${fault.description}</td>
+                        <td>${new Date(fault.reportedAt).toLocaleString()}</td>
+                    `;
+
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('❌ Error fetching faults:', error);
+                alert('Failed to load fault reports.');
+            }
+        }
+
+        // ✅ Automatically fetch faults when the page loads
+        window.onload = fetchFaults;
+    </script>
+</body>
+</html>
