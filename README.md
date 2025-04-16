@@ -11,8 +11,6 @@ A web-based application designed to manage and monitor streetlight fault reports
 
 ## 🛠 Tech Stack
 
-## 🛠 Tech Stack
-
 - **Frontend:** HTML, CSS, JavaScript
 - **Backend:** Node.js, Express.js
 - **Database:** MongoDB
